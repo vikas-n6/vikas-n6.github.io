@@ -52,7 +52,7 @@ open index.html
 |----------|------|
 | 🌐 Portfolio | [vikas-n6.github.io](https://vikas-n6.github.io) |
 | 💼 LinkedIn | [linkedin.com/in/yourprofile](https://www.linkedin.com/in/vikas-n-4a1b9016a/) |
-| 📧 Email | vikasnagendra.com |
+| 📧 Email | vikasnagendra@gmail.com |
 
 ---
 
