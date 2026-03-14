@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Senior Software Engineer | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface2: #1a1a28;
+      --accent: #00e5ff;
+      --accent2: #7b61ff;
+      --accent3: #ff6b6b;
+      --gold: #ffd700;
+      --text: #e8e8f0;
+      --muted: #6e6e8a;
+      --border: rgba(255,255,255,0.07);
+      --glow: 0 0 40px rgba(0,229,255,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(123,97,255,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse 50% 50% at 20% 80%, rgba(0,229,255,0.08) 0%, transparent 60%);
+    }
+
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      border: 1px solid rgba(0,229,255,0.3);
+      padding: 0.35rem 0.9rem;
+      border-radius: 2px;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero-name-accent { color: var(--accent); }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.02em;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(232,232,240,0.7);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      font-weight: 500;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #fff;
+      box-shadow: 0 0 30px rgba(0,229,255,0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Floating stats */
+    .hero-stats {
+      position: absolute;
+      right: 4rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      animation: fadeLeft 1s 0.5s ease both;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--accent);
+    }
+
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-top: 0.3rem;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 4rem; position: relative; }
+
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-tag::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-section { background: var(--surface); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .skill-category:hover {
+      border-color: rgba(0,229,255,0.4);
+      transform: translateY(-4px);
+    }
+
+    .skill-category-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-category-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .skill-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(0,229,255,0.05);
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 4rem;
+      padding-left: 2.5rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.4rem;
+      top: 0.4rem;
+      width: 12px; height: 12px;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(0,229,255,0.5);
+    }
+
+    .timeline-company {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--text);
+    }
+
+    .timeline-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin: 0.3rem 0 1rem;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-section { background: var(--surface); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0,229,255,0.04), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(0,229,255,0.35);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .project-card:hover::after { opacity: 1; }
+
+    .project-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .project-domain {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent2);
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+
+    .project-desc {
+      font-size: 0.9rem;
+      color: rgba(232,232,240,0.65);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-highlight {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(0,229,255,0.06);
+      border-left: 2px solid var(--accent);
+      padding: 0.6rem 0.9rem;
+      font-size: 0.82rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+    .stack-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      padding: 0.25rem 0.65rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      border-radius: 2px;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: rgba(232,232,240,0.7);
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+
+    .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: border-color 0.3s;
+    }
+
+    .highlight-item:hover { border-color: rgba(0,229,255,0.4); }
+
+    .highlight-icon {
+      font-size: 1.3rem;
+      margin-top: 0.1rem;
+      flex-shrink: 0;
+    }
+
+    .highlight-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .highlight-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-card {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s;
+    }
+
+    .cert-card:hover {
+      border-color: rgba(255,215,0,0.4);
+      transform: translateX(6px);
+    }
+
+    .cert-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .cert-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--gold);
+    }
+
+    .cert-issuer {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--surface);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,229,255,0.3);
+      padding-bottom: 0.2rem;
+      margin: 1rem 0 2.5rem;
+      transition: border-color 0.3s;
+    }
+
+    .contact-email:hover { border-color: var(--accent); }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .footer-mono {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: rgba(0,229,255,0.5);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeLeft {
+      from { opacity: 0; transform: translate(20px, -50%); }
+      to   { opacity: 1; transform: translate(0, -50%); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 2px; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .hero-stats { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    /* ── EXPERIENCE DETAILS ── */
+    .exp-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.9rem;
+      color: rgba(232,232,240,0.7);
+    }
+
+    .exp-bullet::before {
+      content: '▹';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .responsibilities-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .responsibilities-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Divider */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">SE // PORTFOLIO</div>
+  <ul class="nav-links">
+    <li><a href="#about">ABOUT</a></li>
+    <li><a href="#skills">SKILLS</a></li>
+    <li><a href="#experience">EXPERIENCE</a></li>
+    <li><a href="#projects">PROJECTS</a></li>
+    <li><a href="#certifications">CERTS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-content">
+    <div class="hero-tag">AVAILABLE FOR OPPORTUNITIES</div>
+    <h1>Senior<br/><span class="hero-name-accent">Software</span><br/>Engineer</h1>
+    <div class="hero-title">Java · Spring Boot · Microservices · FinTech</div>
+    <p class="hero-desc">
+      6+ years architecting enterprise-grade applications across FinTech and Insurance domains.
+      Passionate about clean code, scalable systems, and delivering real-world impact.
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projects">VIEW PROJECTS ↓</a>
+      <a class="btn btn-ghost" href="#contact">GET IN TOUCH</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-number">6+</div>
+      <div class="stat-label">YEARS EXP.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">5</div>
+      <div class="stat-label">KEY PROJECTS</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">30%</div>
+      <div class="stat-label">PERF. GAIN</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">2</div>
+      <div class="stat-label">DOMAINS</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-tag">01 — ABOUT ME</div>
+    <h2>Engineering With Purpose</h2>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        I'm a Senior Software Engineer with over 6 years of experience building production-grade
+        enterprise systems. My expertise lies in Java ecosystem — Spring Boot, Microservices, and
+        RESTful API design — with deep hands-on experience across FinTech and Insurance platforms.
+      </p>
+      <p>
+        Currently at Torry Harris Integration Solutions (Jan 2020 – Present), I've led key modules
+        in micro-loan lending, policy insurance, and WhatsApp-based financial services — shipping
+        features that serve real users across multiple countries.
+      </p>
+      <p>
+        I thrive in Agile environments, champion CI/CD practices, and take pride in writing code
+        that is both maintainable and performant.
+      </p>
+      <p>
+        <strong style="color: var(--text);">Education:</strong>
+        B.E. in Computer Science — Visvesvaraya Technological University, 2019.
+      </p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-item">
+        <div class="highlight-icon">⚡</div>
+        <div>
+          <div class="highlight-title">Performance Obsessed</div>
+          <div class="highlight-desc">Reduced API response time by 30% using Redis caching and query optimization on a live lending platform.</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon">🌍</div>
+        <div>
+          <div class="highlight-title">Global Scale</div>
+          <div class="highlight-desc">Delivered features for multi-country deployments serving thousands of users via mobile, USSD, and WhatsApp.</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon">🔐</div>
+        <div>
+          <div class="highlight-title">FinTech & Insurance Domain</div>
+          <div class="highlight-desc">Deep expertise in loan disbursement, policy management, RBAC, and third-party wallet integrations.</div>
+        </div>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon">🤝</div>
+        <div>
+          <div class="highlight-title">Collaborative Engineer</div>
+          <div class="highlight-desc">Active in peer code reviews, Agile sprints, cross-functional collaboration, and technical documentation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills" class="skills-section">
+  <div class="reveal">
+    <div class="section-tag">02 — TECHNICAL SKILLS</div>
+    <h2>The Tech Stack</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category reveal">
+      <div class="skill-category-icon">☕</div>
+      <div class="skill-category-title">LANGUAGES</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">C++</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-category-icon">🧩</div>
+      <div class="skill-category-title">FRAMEWORKS</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Spring</span>
+        <span class="skill-tag">Spring Boot</span>
+        <span class="skill-tag">Hibernate</span>
+        <span class="skill-tag">Microservices</span>
+        <span class="skill-tag">JSP</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-category-icon">🌐</div>
+      <div class="skill-category-title">WEB TECHNOLOGIES</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">jQuery</span>
+        <span class="skill-tag">RESTful APIs</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-category-icon">🗄️</div>
+      <div class="skill-category-title">DATABASES</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">Oracle</span>
+        <span class="skill-tag">Redis</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-category-icon">🛠️</div>
+      <div class="skill-category-title">TOOLS & CI/CD</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Maven</span>
+        <span class="skill-tag">Jenkins</span>
+        <span class="skill-tag">ELK Stack</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-category-icon">☁️</div>
+      <div class="skill-category-title">CLOUD & DEVOPS</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">Azure</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">Windows</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-tag">03 — PROFESSIONAL EXPERIENCE</div>
+    <h2>Where I've Worked</h2>
+  </div>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-company">Torry Harris Integration Solutions</div>
+      <div class="timeline-meta">SENIOR SOFTWARE ENGINEER &nbsp;·&nbsp; JAN 2020 – PRESENT &nbsp;·&nbsp; BENGALURU, INDIA</div>
+
+      <div class="section-divider"></div>
+
+      <p style="font-size:0.92rem; color:rgba(232,232,240,0.65); margin-bottom:1.5rem;">
+        Enterprise-level software development across FinTech & Insurance domains,
+        delivering scalable microservices and APIs for clients across Africa and Asia.
+      </p>
+
+      <div style="margin-bottom:1.2rem;">
+        <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.95rem; color:var(--accent2); margin-bottom:0.8rem;">
+          KEY RESPONSIBILITIES ACROSS ALL PROJECTS
+        </div>
+        <div class="responsibilities-grid">
+          <div class="exp-bullet">Designed & implemented new features</div>
+          <div class="exp-bullet">Peer code reviews & unit/integration tests</div>
+          <div class="exp-bullet">Requirements analysis & technical docs</div>
+          <div class="exp-bullet">Agile sprints & CI/CD best practices</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects" class="projects-section">
+  <div class="reveal">
+    <div class="section-tag">04 — KEY PROJECTS</div>
+    <h2>Work That Shipped</h2>
+  </div>
+  <div class="projects-grid">
+
+    <!-- P1 -->
+    <div class="project-card reveal">
+      <div class="project-number">PROJECT — 01 &nbsp;|&nbsp; JUL 2023 – PRESENT</div>
+      <div class="project-title">MVola LMS</div>
+      <div class="project-domain">MICRO-LOAN LENDING · FINTECH</div>
+      <div class="project-desc">
+        End-to-end microservices platform for a micro-loan lending system accessible
+        via USSD and mobile apps. Built loan disbursement, repayment APIs, and automated
+        recovery features serving real users at scale.
+      </div>
+      <div class="project-highlight">⚡ 30% reduction in response time via Redis + query optimization</div>
+      <div class="project-stack">
+        <span class="stack-badge">Java</span>
+        <span class="stack-badge">Spring Boot</span>
+        <span class="stack-badge">Microservices</span>
+        <span class="stack-badge">Redis</span>
+        <span class="stack-badge">SQL</span>
+        <span class="stack-badge">REST APIs</span>
+      </div>
+    </div>
+
+    <!-- P2 -->
+    <div class="project-card reveal">
+      <div class="project-number">PROJECT — 02 &nbsp;|&nbsp; JAN 2023 – JUL 2023</div>
+      <div class="project-title">MIP – Policy Insurance App</div>
+      <div class="project-domain">POLICY MANAGEMENT · INSURANCE</div>
+      <div class="project-desc">
+        Built core modules for policy registration, renewal, and wallet integrations.
+        Implemented RESTful APIs and database logic for user and policy lifecycle management,
+        along with third-party wallet integrations for secure transactions.
+      </div>
+      <div class="project-highlight">🔐 Integrated third-party wallets for secure financial transactions</div>
+      <div class="project-stack">
+        <span class="stack-badge">Java</span>
+        <span class="stack-badge">Spring Boot</span>
+        <span class="stack-badge">REST APIs</span>
+        <span class="stack-badge">MySQL</span>
+        <span class="stack-badge">Wallet APIs</span>
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="project-card reveal">
+      <div class="project-number">PROJECT — 03 &nbsp;|&nbsp; AUG 2022 – DEC 2022</div>
+      <div class="project-title">Scoring Platform – TIGO Micro Loans</div>
+      <div class="project-domain">LOAN SCORING · FINTECH</div>
+      <div class="project-desc">
+        Designed and deployed microservices for loan scoring and repayment workflows.
+        Collaborated with cross-functional teams to define interest & penalty logic.
+        Configured RBAC and product management modules in the web application.
+      </div>
+      <div class="project-highlight">🛡️ RBAC implementation for secure role-based product management</div>
+      <div class="project-stack">
+        <span class="stack-badge">Microservices</span>
+        <span class="stack-badge">Spring Boot</span>
+        <span class="stack-badge">RBAC</span>
+        <span class="stack-badge">PostgreSQL</span>
+        <span class="stack-badge">REST APIs</span>
+      </div>
+    </div>
+
+    <!-- P4 -->
+    <div class="project-card reveal">
+      <div class="project-number">PROJECT — 04 &nbsp;|&nbsp; JAN 2022 – AUG 2022</div>
+      <div class="project-title">BIMA Connect</div>
+      <div class="project-domain">AGENT OPERATIONS · INSURANCE</div>
+      <div class="project-desc">
+        Developed microservices supporting insurance agent operations — registration,
+        claims processing, and more. Delivered scalable features designed for
+        multi-country deployment across different regulatory environments.
+      </div>
+      <div class="project-highlight">🌍 Multi-country deployment with localized agent support</div>
+      <div class="project-stack">
+        <span class="stack-badge">Java</span>
+        <span class="stack-badge">Microservices</span>
+        <span class="stack-badge">Spring Boot</span>
+        <span class="stack-badge">MongoDB</span>
+        <span class="stack-badge">REST APIs</span>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="project-card reveal">
+      <div class="project-number">PROJECT — 05 &nbsp;|&nbsp; JAN 2021 – DEC 2021</div>
+      <div class="project-title">PICs – WhatsApp Financial Services</div>
+      <div class="project-domain">CONVERSATIONAL BANKING · FINTECH</div>
+      <div class="project-desc">
+        Engineered backend services enabling users to interact with financial products
+        directly via WhatsApp. Integrated smart eligibility logic to dynamically customize
+        financial offerings based on customer profiles.
+      </div>
+      <div class="project-highlight">💬 WhatsApp-powered financial service with dynamic eligibility engine</div>
+      <div class="project-stack">
+        <span class="stack-badge">Java</span>
+        <span class="stack-badge">Spring Boot</span>
+        <span class="stack-badge">WhatsApp API</span>
+        <span class="stack-badge">REST APIs</span>
+        <span class="stack-badge">MySQL</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CERTIFICATIONS ── -->
+<section id="certifications">
+  <div class="reveal">
+    <div class="section-tag">05 — CERTIFICATIONS</div>
+    <h2>Credentials</h2>
+  </div>
+  <div class="reveal">
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-title">Programming, Data Structures & Algorithms Using Python</div>
+        <div class="cert-issuer">NPTEL — National Programme on Technology Enhanced Learning &nbsp;|&nbsp; IIT Accredited</div>
+      </div>
+    </div>
+    <div class="cert-card" style="border-style:dashed; opacity:0.6;">
+      <div class="cert-icon">🎯</div>
+      <div>
+        <div class="cert-title" style="color: var(--muted);">AWS Certified Developer – Associate</div>
+        <div class="cert-issuer">In Progress — Expanding Cloud Expertise</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner reveal">
+    <div class="section-tag" style="justify-content:center;">06 — CONTACT</div>
+    <h2>Let's Build Something</h2>
+    <p style="color:rgba(232,232,240,0.6); margin-bottom:0.5rem;">
+      Open to senior engineering roles, contract projects, and technical collaborations.
+    </p>
+    <a class="contact-email" href="mailto:vikasnagendra@gmail.com">vikasnagendra@gmail.com</a>
+    <div class="contact-links">
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/vikas-n-4a1b9016a/" target="_blank">↗ LINKEDIN</a>
+      <a class="btn btn-ghost" href="https://github.com/vikas-n6" target="_blank">↗ GITHUB</a>
+      <a class="btn btn-primary" href="#" download>↓ DOWNLOAD RESUME</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-text">© 2025 — Senior Software Engineer. Built with purpose.</div>
+  <div class="footer-mono">JAVA · SPRING BOOT · MICROSERVICES</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
